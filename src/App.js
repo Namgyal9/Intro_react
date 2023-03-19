@@ -1,15 +1,26 @@
 import { useState } from "react";
-import "./App.css";
-import Counter from "./components/Counter";
-import Header from "./components/Header";
+import WeatherForm from "./components/WeatherForm";
+import WeatherList from "./components/WeatherList";
 
 function App() {
-  const [count, setCount] = useState(5);
-
+  const [UserInputLocation, SetLocation] = useState("");
+  const handleChange = (event) => {
+    SetLocation(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
   return (
-    <div>
-      <Header setCount={setCount} />
-      <Counter count={count} />
+    <div className="h-screen w-full flex justify-center items-center">
+      <div>
+        <WeatherForm
+          UserInputLocation={UserInputLocation}
+          handleChange={handleChange}
+        />
+        <WeatherList
+          items={[{ id: 1, location: "New York City", fahrenheit: 32 }]}
+        />
+      </div>
     </div>
   );
 }
